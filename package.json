@@ -1,0 +1,29 @@
+{
+  "name": "evaluacion_kapital",
+  "version": "1.0.0",
+  "description": "BE para la gestión de cuentas y transacciones bancarias",
+  "main": "app.js",
+  "scripts": {
+    "test": "testapp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aydis20P/evaluacion_kapital.git"
+  },
+  "keywords": [
+    "Kapital",
+    "evaluacion",
+    "william",
+    "palacios",
+    "willcdmxdev"
+  ],
+  "author": "William Palacios",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/aydis20P/evaluacion_kapital/issues"
+  },
+  "homepage": "https://github.com/aydis20P/evaluacion_kapital#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
