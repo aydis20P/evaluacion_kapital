@@ -1,0 +1,201 @@
+openapi: 3.0.0
+tags:
+  - name: llaves
+    description: Servicios para la obtención de llaves
+  - name: token
+    description: Servicios para la obtención del jwt
+x-stoplight:
+  id: 7aorqv5j17egs
+info:
+  title: Seguridad Kapital
+  version: '1.0'
+  contact:
+    name: William Palacios
+    email: mich.palacios.hdz@gmail.com
+    url: foo.bar.com
+  description: API de susguridad para el proyecto de evaliación de Kapital
+  license:
+    name: GNU General Public License v3.0
+    url: 'https://fsf.org/'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /llaves:
+    get:
+      summary: /llaves
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - idAcceso
+                  - llavePublica
+                  - llavePrivada
+                properties:
+                  idAcceso:
+                    type: string
+                    x-stoplight:
+                      id: u7ex6wfv2wwn0
+                    example: '20242112142857'
+                  llavePublica:
+                    type: string
+                    x-stoplight:
+                      id: bnhzjl1ayp0oo
+                    example: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCDVHb8RqAiqnBxEcU5hWDHLCq6xqAaB7nBauDCfT6nzr7sX2ASGwna82AssnCHJn6GOtnASQVfeu71QJBd9eIz9B0hCb1Ue41rvIAwWBsNKDpo5yyJ1wPNmak8b0p+sDyJYmGwtUfDZ4ZM4o73ueDBu5fo9ePDj0WQP9caVKDCPQIDAQAB
+                  llavePrivada:
+                    type: string
+                    x-stoplight:
+                      id: igbse5czus6ur
+                    example: MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAINUdvxGoCKqcHERxTmFYMcsKrrGoBoHucFq4MJ9PqfOvuxfYBIbCdrzYCyycIcmfoY62cBJBV967vVAkF314jP0HSEJvVR7jWu8gDBYGw0oOmjnLInXA82ZqTxvSn6wPIliYbC1R8Nnhkzijve54MG7l+j148OPRZA/1xpUoMI9AgMBAAECgYAC8omBwO4Fc9DL4NZjI5itRP2n18muZopR38haj71bvm/vgHZ4rDhXkcsQmxKbyI6Mtv5oaoXJ2PRK9x97qbHhaLZ07XPuVFOkiFN0NrL6yXn+lgM+UIOFKo3y+Zj6U78fWyvDA2/L9/0NxCDtlJ9hBUUN+ttcR8my+V5cOaFVgQJBALBzY58boFOBH02qbAyGmEBm+8NTvHKfAEdZVt2dGyHVB0KkVn8uM5KxI0iGScEalXpZUpF3IRrm3mIMPSmXY30CQQC+iZL2vQJ2qno2vCU3CYmRNyz40/V+wyKmyzTtnQqMUxGFGpUmq94/7Zny6UGHeVVc7zwarvttRDGFX9XUo5XBAkBdiI0iZk6SdTvWu6QS77X9TZnfbJ/UUpyfNahqSUF8qaPzm5GOUTtdYzDE3QpzplfeR0MRgQi3bfIsHzi8t1cxAkEAmewrlDYGmnSHvFXrvnVu86feJbmdNeVPxeyc+mOGFOw6WAuseAwZxA0e89Qpgtaq9iOxq2C2boPLeZJ8/IWWQQJACAWCZC2Z8Sv9Hz+UjrwIBohd/VNoEUJnds88uiij57NKZjd1d7PKY/T7Lm51z3iapBR+7fOY37fwQ2XTKo6s6w==
+              examples:
+                Example 1:
+                  value:
+                    idAcceso: '20242112142857'
+                    llavePublica: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCDVHb8RqAiqnBxEcU5hWDHLCq6xqAaB7nBauDCfT6nzr7sX2ASGwna82AssnCHJn6GOtnASQVfeu71QJBd9eIz9B0hCb1Ue41rvIAwWBsNKDpo5yyJ1wPNmak8b0p+sDyJYmGwtUfDZ4ZM4o73ueDBu5fo9ePDj0WQP9caVKDCPQIDAQAB
+                    llavePrivada: MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAINUdvxGoCKqcHERxTmFYMcsKrrGoBoHucFq4MJ9PqfOvuxfYBIbCdrzYCyycIcmfoY62cBJBV967vVAkF314jP0HSEJvVR7jWu8gDBYGw0oOmjnLInXA82ZqTxvSn6wPIliYbC1R8Nnhkzijve54MG7l+j148OPRZA/1xpUoMI9AgMBAAECgYAC8omBwO4Fc9DL4NZjI5itRP2n18muZopR38haj71bvm/vgHZ4rDhXkcsQmxKbyI6Mtv5oaoXJ2PRK9x97qbHhaLZ07XPuVFOkiFN0NrL6yXn+lgM+UIOFKo3y+Zj6U78fWyvDA2/L9/0NxCDtlJ9hBUUN+ttcR8my+V5cOaFVgQJBALBzY58boFOBH02qbAyGmEBm+8NTvHKfAEdZVt2dGyHVB0KkVn8uM5KxI0iGScEalXpZUpF3IRrm3mIMPSmXY30CQQC+iZL2vQJ2qno2vCU3CYmRNyz40/V+wyKmyzTtnQqMUxGFGpUmq94/7Zny6UGHeVVc7zwarvttRDGFX9XUo5XBAkBdiI0iZk6SdTvWu6QS77X9TZnfbJ/UUpyfNahqSUF8qaPzm5GOUTtdYzDE3QpzplfeR0MRgQi3bfIsHzi8t1cxAkEAmewrlDYGmnSHvFXrvnVu86feJbmdNeVPxeyc+mOGFOw6WAuseAwZxA0e89Qpgtaq9iOxq2C2boPLeZJ8/IWWQQJACAWCZC2Z8Sv9Hz+UjrwIBohd/VNoEUJnds88uiij57NKZjd1d7PKY/T7Lm51z3iapBR+7fOY37fwQ2XTKo6s6w==
+        '401':
+          description: Unauthorized
+          content: {}
+        '500':
+          description: Internal Server Error
+      operationId: get-llaves
+      x-stoplight:
+        id: l54ys2ikmkdyv
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: x-id-transaccion
+          description: UUID para la traza de la operación
+          required: true
+      description: |-
+        Servicio para la obtención de llaves RSA para el cifrado de datos sensibles
+        Duración de las llaves de 5 minutos
+  /llaves/{idAcceso}:
+    get:
+      summary: '/llaves/{idAcceso}'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - llavePublica
+                  - llavePrivada
+                properties:
+                  llavePublica:
+                    type: string
+                    x-stoplight:
+                      id: e32dg4hjy4023
+                    example: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCDVHb8RqAiqnBxEcU5hWDHLCq6xqAaB7nBauDCfT6nzr7sX2ASGwna82AssnCHJn6GOtnASQVfeu71QJBd9eIz9B0hCb1Ue41rvIAwWBsNKDpo5yyJ1wPNmak8b0p+sDyJYmGwtUfDZ4ZM4o73ueDBu5fo9ePDj0WQP9caVKDCPQIDAQAB
+                  llavePrivada:
+                    type: string
+                    x-stoplight:
+                      id: dwohy7jx5zu7b
+                    example: MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAINUdvxGoCKqcHERxTmFYMcsKrrGoBoHucFq4MJ9PqfOvuxfYBIbCdrzYCyycIcmfoY62cBJBV967vVAkF314jP0HSEJvVR7jWu8gDBYGw0oOmjnLInXA82ZqTxvSn6wPIliYbC1R8Nnhkzijve54MG7l+j148OPRZA/1xpUoMI9AgMBAAECgYAC8omBwO4Fc9DL4NZjI5itRP2n18muZopR38haj71bvm/vgHZ4rDhXkcsQmxKbyI6Mtv5oaoXJ2PRK9x97qbHhaLZ07XPuVFOkiFN0NrL6yXn+lgM+UIOFKo3y+Zj6U78fWyvDA2/L9/0NxCDtlJ9hBUUN+ttcR8my+V5cOaFVgQJBALBzY58boFOBH02qbAyGmEBm+8NTvHKfAEdZVt2dGyHVB0KkVn8uM5KxI0iGScEalXpZUpF3IRrm3mIMPSmXY30CQQC+iZL2vQJ2qno2vCU3CYmRNyz40/V+wyKmyzTtnQqMUxGFGpUmq94/7Zny6UGHeVVc7zwarvttRDGFX9XUo5XBAkBdiI0iZk6SdTvWu6QS77X9TZnfbJ/UUpyfNahqSUF8qaPzm5GOUTtdYzDE3QpzplfeR0MRgQi3bfIsHzi8t1cxAkEAmewrlDYGmnSHvFXrvnVu86feJbmdNeVPxeyc+mOGFOw6WAuseAwZxA0e89Qpgtaq9iOxq2C2boPLeZJ8/IWWQQJACAWCZC2Z8Sv9Hz+UjrwIBohd/VNoEUJnds88uiij57NKZjd1d7PKY/T7Lm51z3iapBR+7fOY37fwQ2XTKo6s6w==
+              examples:
+                Example 1:
+                  value:
+                    llavePublica: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCDVHb8RqAiqnBxEcU5hWDHLCq6xqAaB7nBauDCfT6nzr7sX2ASGwna82AssnCHJn6GOtnASQVfeu71QJBd9eIz9B0hCb1Ue41rvIAwWBsNKDpo5yyJ1wPNmak8b0p+sDyJYmGwtUfDZ4ZM4o73ueDBu5fo9ePDj0WQP9caVKDCPQIDAQAB
+                    llavePrivada: MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAINUdvxGoCKqcHERxTmFYMcsKrrGoBoHucFq4MJ9PqfOvuxfYBIbCdrzYCyycIcmfoY62cBJBV967vVAkF314jP0HSEJvVR7jWu8gDBYGw0oOmjnLInXA82ZqTxvSn6wPIliYbC1R8Nnhkzijve54MG7l+j148OPRZA/1xpUoMI9AgMBAAECgYAC8omBwO4Fc9DL4NZjI5itRP2n18muZopR38haj71bvm/vgHZ4rDhXkcsQmxKbyI6Mtv5oaoXJ2PRK9x97qbHhaLZ07XPuVFOkiFN0NrL6yXn+lgM+UIOFKo3y+Zj6U78fWyvDA2/L9/0NxCDtlJ9hBUUN+ttcR8my+V5cOaFVgQJBALBzY58boFOBH02qbAyGmEBm+8NTvHKfAEdZVt2dGyHVB0KkVn8uM5KxI0iGScEalXpZUpF3IRrm3mIMPSmXY30CQQC+iZL2vQJ2qno2vCU3CYmRNyz40/V+wyKmyzTtnQqMUxGFGpUmq94/7Zny6UGHeVVc7zwarvttRDGFX9XUo5XBAkBdiI0iZk6SdTvWu6QS77X9TZnfbJ/UUpyfNahqSUF8qaPzm5GOUTtdYzDE3QpzplfeR0MRgQi3bfIsHzi8t1cxAkEAmewrlDYGmnSHvFXrvnVu86feJbmdNeVPxeyc+mOGFOw6WAuseAwZxA0e89Qpgtaq9iOxq2C2boPLeZJ8/IWWQQJACAWCZC2Z8Sv9Hz+UjrwIBohd/VNoEUJnds88uiij57NKZjd1d7PKY/T7Lm51z3iapBR+7fOY37fwQ2XTKo6s6w==
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-llaves-idAcceso
+      x-stoplight:
+        id: w34zrw4wedcce
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: idAcceso
+          description: idAcceso obtenido del servicio de llaves
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: x-id-transaccion
+          description: UUID para la traza de la operación
+          required: true
+      description: Servicio para la obtención de llaves RSA para el cifrado de datos sensibles dado un idAcceso previamente generado en el servicio de llaves
+  /token:
+    post:
+      summary: /auth/token
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - token
+                properties:
+                  token:
+                    type: string
+                    x-stoplight:
+                      id: o55rrlm0wtn6k
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+              examples:
+                Example 1:
+                  value:
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      operationId: post-token
+      x-stoplight:
+        id: wgqth73wk100b
+      description: |-
+        Servicio para la obtención del jwt
+        Vida útil del token de 5 minutos
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - grant_type
+              properties:
+                grant_type:
+                  type: string
+                  x-stoplight:
+                    id: o73az2kwvnruf
+                  default: client_credentials
+                  example: client_credentials
+      security:
+        - BasicAuth: []
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: x-id-transaccion
+          description: UUID para la traza de la operación
+components:
+  schemas: {}
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+
