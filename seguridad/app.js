@@ -1,9 +1,12 @@
 var express = require('express');
-const { validateGetLlaves, validateGetLlavesById, validatePostToken } = require('./validations/llaves-validator');
-const { validationResult } = require('express-validator');
+var bodyParser = require('body-parser');
+const { validateGetLlaves, validateGetLlavesById, validatePostToken, handleValidationErrors } = require('./validations/llaves-validator');
+const { getLlaves, getLlaveById, postToken } = require('./controllers/seguridad');
 
 var app = express();
 app.use(express.json());
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use((err, req, res, next) => {
   // format error
   res.status(err.status || 500).json({
@@ -18,32 +21,26 @@ app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
-app.get('/llaves', validateGetLlaves, (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  // Lógica del controlador
-  res.status(201).send('Llaves obtenidas');
-});
+app.get(
+  '/llaves',
+  validateGetLlaves, 
+  handleValidationErrors,
+  getLlaves
+);
 
-app.get('/llaves/:idAcceso', validateGetLlavesById, (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  // Lógica del controlador
-  res.status(200).send('Llave obtenida por ID');
-});
+app.get(
+  '/llaves/:idAcceso', 
+  validateGetLlavesById,
+  handleValidationErrors,
+  getLlaveById
+);
 
-app.post('/token', validatePostToken, (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  // Lógica del controlador
-  res.status(201).send({ token: 'jwt-token-ejemplo' });
-});
+app.post(
+  '/token',
+  validatePostToken,
+  handleValidationErrors,
+  postToken
+);
 
 
 app.listen(3001, function () {

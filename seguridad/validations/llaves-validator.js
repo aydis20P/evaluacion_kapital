@@ -1,5 +1,14 @@
-const { check, header } = require('express-validator');
+const { check, header, validationResult } = require('express-validator');
 const { validateJWT } = require('../utils/validateJWT');
+
+// Middleware para manejar errores de validación
+exports.handleValidationErrors = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  next();
+};
 
 exports.validateGetLlaves = [
   validateJWT,
