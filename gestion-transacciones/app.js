@@ -1,7 +1,11 @@
 var express = require('express');
 const OpenApiValidator = require('express-openapi-validator');
+const path = require('path');
 
 var app = express();
+
+const spec = path.join(__dirname, 'Gestion-Cuentas-Kapital.yaml');
+app.use('/spec', express.static(spec));
 
 app.use(
   OpenApiValidator.middleware({
