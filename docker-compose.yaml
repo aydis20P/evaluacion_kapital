@@ -10,9 +10,18 @@ services: # services which our app going to use. (list of containers we want to 
       - mongo-data:/data/db
 
   api-server:
-    build: . # build the Docker image for the service using the Dockerfile located in the current directory
+    build: ./gestion-transacciones # build the Docker image for the service using the Dockerfile located in the current directory
     ports:
       - "9000:3000"
+    networks: # adding network
+      - kapital-app
+    depends_on:
+      - mongoCont
+
+  api-server-seguridad:
+    build: ./seguridad # build the Docker image for the service using the Dockerfile located in the current directory
+    ports:
+      - "9001:3001"
     networks: # adding network
       - kapital-app
     depends_on:
