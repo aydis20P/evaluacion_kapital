@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/aydis20P/evaluacion_kapital#readme",
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "express-openapi-validator": "^5.3.9"
   }
 }
