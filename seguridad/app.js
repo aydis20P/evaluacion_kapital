@@ -1,20 +1,9 @@
 var express = require('express');
-const OpenApiValidator = require('express-openapi-validator');
-const path = require('path');
+const { validateGetLlaves, validateGetLlavesById, validatePostToken } = require('./validations/llaves-validator');
+const { validationResult } = require('express-validator');
 
 var app = express();
-
-const spec = path.join(__dirname, 'Seguridad-Kapital.yaml');
-app.use('/spec', express.static(spec));
-
-app.use(
-  OpenApiValidator.middleware({
-    apiSpec: './Seguridad-Kapital.yaml',
-    validateRequests: true,
-    validateResponses: false,
-  }),
-);
-
+app.use(express.json());
 app.use((err, req, res, next) => {
   // format error
   res.status(err.status || 500).json({
@@ -23,17 +12,39 @@ app.use((err, req, res, next) => {
   });
 });
 
+
 // Endpoints
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
-app.get('/llaves', function (req, res, next) {
-  res.json([
-    { id: 1, type: 'cat', name: 'max' },
-    { id: 2, type: 'cat', name: 'mini' },
-  ]);
+app.get('/llaves', validateGetLlaves, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  // Lógica del controlador
+  res.status(201).send('Llaves obtenidas');
 });
+
+app.get('/llaves/:idAcceso', validateGetLlavesById, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  // Lógica del controlador
+  res.status(200).send('Llave obtenida por ID');
+});
+
+app.post('/token', validatePostToken, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  // Lógica del controlador
+  res.status(201).send({ token: 'jwt-token-ejemplo' });
+});
+
 
 app.listen(3001, function () {
   console.log('Example app listening on port 3001!');

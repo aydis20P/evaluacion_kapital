@@ -1,10 +1,10 @@
 {
-  "name": "evaluacion_kapital",
+  "name": "seguridad_kapital",
   "version": "1.0.0",
-  "description": "BE para la gestión de cuentas y transacciones bancarias",
+  "description": "BE de seguridad para la evaluación de Kapital",
   "main": "app.js",
   "scripts": {
-    "test": "testapp"
+    "test": "testseguridad"
   },
   "repository": {
     "type": "git",
@@ -15,7 +15,8 @@
     "evaluacion",
     "william",
     "palacios",
-    "willcdmxdev"
+    "willcdmxdev",
+    "seguridad"
   ],
   "author": "William Palacios",
   "license": "GPL-3.0-or-later",
@@ -25,6 +26,7 @@
   "homepage": "https://github.com/aydis20P/evaluacion_kapital#readme",
   "dependencies": {
     "express": "^4.21.2",
-    "express-openapi-validator": "^5.3.9"
+    "express-validator": "^7.2.0",
+    "jsonwebtoken": "^9.0.2"
   }
 }

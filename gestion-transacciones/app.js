@@ -1,20 +1,9 @@
 var express = require('express');
-const OpenApiValidator = require('express-openapi-validator');
-const path = require('path');
+const { postCuentasValidations, getCuentasValidations, getCuentaByIdValidations, patchCuentaValidations, postTransaccionesValidations, handleValidationErrors } = require('./validations/transacciones-validator');
+const { validationResult } = require('express-validator');
 
 var app = express();
-
-const spec = path.join(__dirname, 'Gestion-Cuentas-Kapital.yaml');
-app.use('/spec', express.static(spec));
-
-app.use(
-  OpenApiValidator.middleware({
-    apiSpec: './Gestion-Cuentas-Kapital.yaml',
-    validateRequests: true,
-    validateResponses: false,
-  }),
-);
-
+app.use(express.json());
 app.use((err, req, res, next) => {
   // format error
   res.status(err.status || 500).json({
@@ -23,17 +12,67 @@ app.use((err, req, res, next) => {
   });
 });
 
+
 // Endpoints
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
-app.get('/cuentas', function (req, res, next) {
-  res.json([
-    { id: 1, type: 'cat', name: 'max' },
-    { id: 2, type: 'cat', name: 'mini' },
-  ]);
-});
+// Ruta POST /cuentas
+app.post(
+  '/cuentas',
+  postCuentasValidations,
+  handleValidationErrors,
+  (req, res) => {
+    // Lógica para crear cuenta
+    res.status(201).json({ message: 'Cuenta creada exitosamente' });
+  }
+);
+
+// Ruta GET /cuentas
+app.get(
+  '/cuentas',
+  getCuentasValidations,
+  handleValidationErrors,
+  (req, res) => {
+    // Lógica para listar cuentas
+    res.status(200).json([]);
+  }
+);
+
+// Ruta GET /cuentas/:cuentaId
+app.get(
+  '/cuentas/:cuentaId',
+  getCuentaByIdValidations,
+  handleValidationErrors,
+  (req, res) => {
+    // Lógica para obtener detalles de una cuenta
+    res.status(200).json({});
+  }
+);
+
+// Ruta PATCH /cuentas/:cuentaId
+app.patch(
+  '/cuentas/:cuentaId',
+  patchCuentaValidations,
+  handleValidationErrors,
+  (req, res) => {
+    // Lógica para actualizar información de una cuenta
+    res.status(200).json({ message: 'Cuenta actualizada exitosamente' });
+  }
+);
+
+// Ruta POST /cuentas/:cuentaId/transacciones
+app.post(
+  '/cuentas/:cuentaId/transacciones',
+  postTransaccionesValidations,
+  handleValidationErrors,
+  (req, res) => {
+    // Lógica para realizar transacción
+    res.status(200).json({ message: 'Transacción completada exitosamente' });
+  }
+);
+
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
