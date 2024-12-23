@@ -47,6 +47,27 @@ exports.getLlaveById = async (req, res) => {
 };
 
 exports.postToken = (req, res) => {
+  // Obtener el header de Authorization
+  const authHeader = req.header('Authorization');
+
+  if (!authHeader || !authHeader.startsWith('Basic ')) {
+    return res.status(401).json({ error: 'Authorization header is required and must use Basic Auth' });
+  }
+
+  // Decodificar credenciales de Basic Auth
+  const base64Credentials = authHeader.split(' ')[1];
+  const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
+  const [username, password] = credentials.split(':');
+
+  // Validar credenciales
+  const validUsername = 'Kapital';
+  const validPassword = 'K@p1t@1pwD3s';
+
+  if (username !== validUsername || password !== validPassword) {
+    return res.status(401).json({ error: 'Invalid username or password' });
+  }
+
+  // Validar el campo grant_type
   const { grant_type } = req.body;
 
   if (grant_type !== 'client_credentials') {
