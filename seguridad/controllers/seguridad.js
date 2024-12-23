@@ -1,15 +1,26 @@
 const NodeRSA = require('node-rsa');
 const { Llave, Credential } = require('../repository/datasource');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 
 exports.getLlaves = async (req, res) => {
   try {
     // Generar par de llaves RSA
-    const key = new NodeRSA({ b: 512 });
-    const llavePublica = key.exportKey('public').replace(/-----[A-Z\s]+-----|\n/g, '');
-    const llavePrivada = key.exportKey('private').replace(/-----[A-Z\s]+-----|\n/g, '');
-    const idAcceso = new Date().toISOString().replace(/[-:.TZ]/g, ''); // ID basado en fecha y hora
+    const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
+      modulusLength: 2048, // Longitud de la llave en bits
+      publicKeyEncoding: {
+        type: 'spki', // Public Key Cryptography Standards
+        format: 'pem',
+      },
+      privateKeyEncoding: {
+        type: 'pkcs8', // Public-Key Cryptography Standards
+        format: 'pem',
+      },
+    });
+
+    // Limpiar llaves eliminando las leyendas y saltos de línea
+    const llavePublica = publicKey.replace(/-----[A-Z\s]+-----|\n/g, '');
+    const llavePrivada = privateKey.replace(/-----[A-Z\s]+-----|\n/g, '');    const idAcceso = new Date().toISOString().replace(/[-:.TZ]/g, ''); // ID basado en fecha y hora
 
     // Almacenar en la base de datos
     const nuevaLlave = new Llave({ idAcceso, llavePublica, llavePrivada });
