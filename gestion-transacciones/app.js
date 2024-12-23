@@ -42,10 +42,7 @@ app.get(
   '/cuentas/:cuentaId',
   getCuentaByIdValidations,
   handleValidationErrors,
-  (req, res) => {
-    // Lógica para obtener detalles de una cuenta
-    res.status(200).json({});
-  }
+  getCuentaById,
 );
 
 // Ruta PATCH /cuentas/:cuentaId

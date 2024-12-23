@@ -68,16 +68,22 @@ exports.listCuentas = async (req, res) => {
 };
 
 exports.getCuentaById = async (req, res) => {
-  const { idAcceso } = req.params;
+  const idAcceso = req.get('x-id-acceso');
 
   try {
     const cuenta = await Cuenta.findById(req.params.cuentaId);
     if (!cuenta) {
       return res.status(404).json({ error: 'Cuenta no encontrada' });
     }
-    res.status(200).json({ encryptedData: encryptRSA(cuenta, idAcceso) });
+    resultResponse = {
+        id: cuenta._id,
+        nombre: cuenta.nombre,
+        saldo: cuenta.saldo,
+    }
+    const result = await encryptRSAPromise(resultResponse, idAcceso);
+    res.status(200).json({ encryptedData: result });
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener la cuenta' });
+    res.status(500).json({ error: 'Error al obtener la cuenta: ' + error });
   }
 };
 
