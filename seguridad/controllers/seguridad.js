@@ -2,6 +2,7 @@ const NodeRSA = require('node-rsa');
 const { Llave, Credential } = require('../repository/datasource');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 exports.getLlaves = async (req, res) => {
   try {

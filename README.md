@@ -22,4 +22,4 @@ Please make sure to update tests as appropriate.
 
 ## License
 
-[GNU General Public License v3.0](https://fsf.org/)
+[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.en)

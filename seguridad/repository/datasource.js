@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-mongoose.connect('mongodb://127.0.0.1:27017/seguridad', {
-//mongoose.connect('mongodb://mongoCont:27017/seguridad', {
+//mongoose.connect('mongodb://127.0.0.1:27017/seguridad', {
+mongoose.connect('mongodb://mongoCont:27017/seguridad', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
