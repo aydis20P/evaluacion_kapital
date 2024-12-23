@@ -34,10 +34,7 @@ app.get(
   '/cuentas',
   getCuentasValidations,
   handleValidationErrors,
-  (req, res) => {
-    // Lógica para listar cuentas
-    res.status(200).json([]);
-  }
+  listCuentas,
 );
 
 // Ruta GET /cuentas/:cuentaId

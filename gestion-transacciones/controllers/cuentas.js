@@ -14,7 +14,12 @@ exports.createCuenta = async (req, res) => {
       saldo: req.body.saldoInicial,
     });
     await nuevaCuenta.save();
-    encryptRSA(nuevaCuenta, idAcceso, function(err, result){
+    nuevaCuentaResponse = {
+      id: nuevaCuenta._id,
+      nombre: nuevaCuenta.nombre,
+      saldo: nuevaCuenta.saldo,
+    }
+    encryptRSA(nuevaCuentaResponse, idAcceso, function(err, result){
       if (err) {
         console.log ('error', err.message, err.stack)
         res.status(500).json({ error: err.message });
@@ -27,15 +32,38 @@ exports.createCuenta = async (req, res) => {
   }
 };
 
+function encryptRSAPromise(cuenta, idAcceso) {
+  return new Promise((resolve, reject) => {
+    encryptRSA(cuenta, idAcceso, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
 exports.listCuentas = async (req, res) => {
-  const { idAcceso } = req.params;
+  const idAcceso = req.get('x-id-acceso');
 
   try {
     const cuentas = await Cuenta.find();
-    const encryptedCuentas = cuentas.map((cuenta) => encryptRSA(cuenta, idAcceso));
+
+    encryptedCuentas = []
+    for (const cuenta of cuentas) {
+      resultResponse = {
+        id: cuenta._id,
+        nombre: cuenta.nombre,
+        saldo: cuenta.saldo,
+      }
+      const result = await encryptRSAPromise(resultResponse, idAcceso);
+      encryptedCuentas.push(result);
+    };
+
     res.status(200).json({ encryptedData: encryptedCuentas });
   } catch (error) {
-    res.status(500).json({ error: 'Error al listar las cuentas' });
+    res.status(500).json({ error: 'Error al listar las cuentas: ' + error.message });
   }
 };
 

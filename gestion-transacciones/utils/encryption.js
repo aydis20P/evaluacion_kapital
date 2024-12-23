@@ -2,7 +2,7 @@ const { Llave } = require('../repository/llaves-datasource');
 const crypto = require('crypto');
 
 const encryptRSA = async (data, idAcceso, done) => {
-  console.log(`ID ACCESO ENCRYPT: ${idAcceso}`)
+  //console.log(`ID ACCESO ENCRYPT: ${idAcceso}`)
 
   const llave = await Llave.findOne({ idAcceso });
 
@@ -21,7 +21,7 @@ const encryptRSA = async (data, idAcceso, done) => {
 };
 
 const decryptRSA = (data, llavePrivada) => {
-  console.log(`LLAVE PRIVADA: ${llavePrivada}`);
+  //console.log(`LLAVE PRIVADA: ${llavePrivada}`);
   //return JSON.parse(crypto.privateDecrypt(llavePrivada, Buffer.from(data, 'base64')).toString());
   return JSON.parse(crypto.privateDecrypt(
 	  {
@@ -33,7 +33,7 @@ const decryptRSA = (data, llavePrivada) => {
 // Middleware para descifrar el cuerpo de la solicitud
 const decryptRequestBody = async (req, res, next) => {
   const idAcceso = req.get('x-id-acceso');
-  console.log(`ID ACCESO DECRYPT: ${idAcceso}`)
+  //console.log(`ID ACCESO DECRYPT: ${idAcceso}`)
 
   try {
     const llave = await Llave.findOne({ idAcceso:idAcceso });
