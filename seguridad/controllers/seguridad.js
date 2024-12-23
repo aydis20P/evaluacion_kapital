@@ -1,6 +1,7 @@
 const NodeRSA = require('node-rsa');
-const Llave = require('../repository/datasource');
+const { Llave, Credential } = require('../repository/datasource');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 exports.getLlaves = async (req, res) => {
   try {
@@ -46,7 +47,7 @@ exports.getLlaveById = async (req, res) => {
   }
 };
 
-exports.postToken = (req, res) => {
+exports.postToken = async (req, res) => {
   // Obtener el header de Authorization
   const authHeader = req.header('Authorization');
 
@@ -59,36 +60,36 @@ exports.postToken = (req, res) => {
   const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
   const [username, password] = credentials.split(':');
 
-  // Validar credenciales
-  const validUsername = 'Kapital';
-  const validPassword = 'K@p1t@1pwD3s';
-
-  if (username !== validUsername || password !== validPassword) {
-    return res.status(401).json({ error: 'Invalid username or password' });
-  }
-
-  // Validar el campo grant_type
-  const { grant_type } = req.body;
-
-  if (grant_type !== 'client_credentials') {
-    return res.status(400).json({ error: 'grant_type debe ser "client_credentials"' });
-  }
-
   try {
-    // Datos del payload (personalizar según sea necesario)
-    const payload = {
-      sub: '1234567890',
-      name: 'John Doe',
-      iat: Math.floor(Date.now() / 1000), // Fecha actual en segundos
-    };
+    // Buscar credenciales en la base de datos
+    const user = await Credential.findOne({ username: username });
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    // Validar contraseña con bcrypt
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    // Validar el campo grant_type
+    const { grant_type } = req.body;
+    if (grant_type !== 'client_credentials') {
+      return res.status(400).json({ error: 'grant_type must be "client_credentials"' });
+    }
 
     // Generar token con duración de 5 minutos
+    const payload = {
+      sub: user._id,
+      username: user.username,
+      iat: Math.floor(Date.now() / 1000),
+    };
     const token = jwt.sign(payload, 'your-secret-key', { expiresIn: '5m' });
 
     res.status(201).json({ token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Error al generar el token' });
+    res.status(500).json({ error: 'Error al procesar la solicitud' });
   }
 };
-
