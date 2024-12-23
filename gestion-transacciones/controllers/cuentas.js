@@ -88,25 +88,34 @@ exports.getCuentaById = async (req, res) => {
 };
 
 exports.updateCuenta = async (req, res) => {
-  const { idAcceso } = req.params;
+  const idAcceso = req.get('x-id-acceso');
 
   try {
-    const cuentaActualizada = await Cuenta.findByIdAndUpdate(
-      req.params.cuentaId,
+    //console.log("NOMBRE NUEVO: " + req.body.nombre);
+    const cuentaActualizada = await Cuenta.findOneAndUpdate(
+      { _id: req.params.cuentaId },
       { nombre: req.body.nombre },
-      { new: true }
+      { new: true } // Devuelve el documento actualizado
     );
+    //console.log("CUENTA ACTUALIZADA: " + cuentaActualizada)
     if (!cuentaActualizada) {
-      return res.status(404).json({ error: 'Cuenta no encontrada' });
+      return res.status(404).json({ error: 'Cuenta no actualizada' });
     }
-    res.status(200).json({ encryptedData: encryptRSA(cuentaActualizada, idAcceso) });
+    resultResponse = {
+        id: cuentaActualizada._id,
+        nombre: cuentaActualizada.nombre,
+        saldo: cuentaActualizada.saldo,
+    }
+
+    const result = await encryptRSAPromise(resultResponse, idAcceso);
+    res.status(200).json({ encryptedData: result });
   } catch (error) {
-    res.status(500).json({ error: 'Error al actualizar la cuenta' });
+    res.status(500).json({ error: 'Error al actualizar la cuenta: ' + error.message });
   }
 };
 
 exports.createTransaccion = async (req, res) => {
-  const { idAcceso } = req.params;
+  const idAcceso = req.get('x-id-acceso');
 
   try {
     const cuenta = await Cuenta.findById(req.params.cuentaId);
@@ -129,7 +138,15 @@ exports.createTransaccion = async (req, res) => {
       fecha: new Date(),
     });
     await nuevaTransaccion.save();
-    res.status(200).json({ encryptedData: encryptRSA(nuevaTransaccion, idAcceso) });
+    resultResponse = {
+        id: nuevaTransaccion._id,
+        tipo: nuevaTransaccion.tipo,
+        monto: nuevaTransaccion.monto,
+        fecha: nuevaTransaccion.fecha,
+    }
+
+    const result = await encryptRSAPromise(resultResponse, idAcceso);
+    res.status(200).json({ encryptedData: result });
   } catch (error) {
     res.status(500).json({ error: 'Error al realizar la transacción' });
   }

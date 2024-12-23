@@ -14,9 +14,11 @@ const encryptRSA = async (data, idAcceso, done) => {
     //console.log(`LLAVE PUBLICA: ${llave.llavePublica}`);
     //console.log(`LLAVE PRIVADA: ${llave.llavePrivada}`);
     const result = crypto.publicEncrypt("-----BEGIN PUBLIC KEY-----\n" + llave.llavePublica + "\n-----END PUBLIC KEY-----", Buffer.from(JSON.stringify(data))).toString('base64');
-    return done (null, result)
+    //console.log(result);
+    return done(null, result)
   } catch (error) {
-    return done (Error (error.message))
+    console.log(error.message);
+    return done(error, null)
   }
 };
 

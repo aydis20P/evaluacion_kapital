@@ -48,23 +48,19 @@ app.get(
 // Ruta PATCH /cuentas/:cuentaId
 app.patch(
   '/cuentas/:cuentaId',
+  decryptRequestBody,
   patchCuentaValidations,
   handleValidationErrors,
-  (req, res) => {
-    // Lógica para actualizar información de una cuenta
-    res.status(200).json({ message: 'Cuenta actualizada exitosamente' });
-  }
+  updateCuenta,
 );
 
 // Ruta POST /cuentas/:cuentaId/transacciones
 app.post(
   '/cuentas/:cuentaId/transacciones',
+  decryptRequestBody,
   postTransaccionesValidations,
   handleValidationErrors,
-  (req, res) => {
-    // Lógica para realizar transacción
-    res.status(200).json({ message: 'Transacción completada exitosamente' });
-  }
+  createTransaccion
 );
 
 
