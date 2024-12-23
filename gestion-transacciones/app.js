@@ -1,6 +1,8 @@
 var express = require('express');
 const { postCuentasValidations, getCuentasValidations, getCuentaByIdValidations, patchCuentaValidations, postTransaccionesValidations, handleValidationErrors } = require('./validations/transacciones-validator');
 const { validationResult } = require('express-validator');
+const { createCuenta, listCuentas, getCuentaById, updateCuenta, createTransaccion } = require('./controllers/cuentas');
+const { decryptRequestBody } = require('./utils/encryption');
 
 var app = express();
 app.use(express.json());
@@ -21,12 +23,10 @@ app.get('/', function (req, res) {
 // Ruta POST /cuentas
 app.post(
   '/cuentas',
+  decryptRequestBody,
   postCuentasValidations,
   handleValidationErrors,
-  (req, res) => {
-    // Lógica para crear cuenta
-    res.status(201).json({ message: 'Cuenta creada exitosamente' });
-  }
+  createCuenta
 );
 
 // Ruta GET /cuentas
