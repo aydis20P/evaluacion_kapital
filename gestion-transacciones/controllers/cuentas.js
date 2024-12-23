@@ -5,6 +5,9 @@ exports.createCuenta = async (req, res) => {
   const idAcceso = req.get('x-id-acceso');
 
   try {
+    const cuenta = await Cuenta.findOne({ nombre: req.body.nombre});
+    if(cuenta)
+      return res.status(400).json({ error: 'Cuenta ya existente' });
     const nuevaCuenta = new Cuenta({
       nombre: req.body.nombre,
       saldoInicial: req.body.saldoInicial,
