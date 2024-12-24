@@ -1,7 +1,7 @@
 var express = require('express');
-const { postCuentasValidations, getCuentasValidations, getCuentaByIdValidations, patchCuentaValidations, postTransaccionesValidations, handleValidationErrors } = require('./validations/transacciones-validator');
+const { postCuentasValidations, getCuentasValidations, getCuentaByIdValidations, patchCuentaValidations, postTransaccionesValidations, handleValidationErrors, getHistorialTransaccionesValidations } = require('./validations/transacciones-validator');
 const { validationResult } = require('express-validator');
-const { createCuenta, listCuentas, getCuentaById, updateCuenta, createTransaccion } = require('./controllers/cuentas');
+const { createCuenta, listCuentas, getCuentaById, updateCuenta, createTransaccion, getHistorialTransacciones } = require('./controllers/cuentas');
 const { decryptRequestBody } = require('./utils/encryption');
 
 var app = express();
@@ -61,6 +61,14 @@ app.post(
   postTransaccionesValidations,
   handleValidationErrors,
   createTransaccion
+);
+
+// Ruta GET /cuentas/:cuentaId/transacciones
+app.get(
+  '/cuentas/:cuentaId/transacciones',
+  getHistorialTransaccionesValidations,
+  handleValidationErrors,
+  getHistorialTransacciones
 );
 
 

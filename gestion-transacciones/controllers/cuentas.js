@@ -152,3 +152,36 @@ exports.createTransaccion = async (req, res) => {
   }
 };
 
+exports.getHistorialTransacciones = async (req, res) => {
+  const idAcceso = req.get('x-id-acceso');
+
+  try {
+    const { cuentaId } = req.params;
+
+    // Verifica si la cuenta existe
+    const cuenta = await Cuenta.findById(cuentaId);
+    if (!cuenta) {
+      return res.status(404).json({ error: 'Cuenta no encontrada' });
+    }
+
+    // Obtén el historial de transacciones
+    const historial = await Transaccion.find({ cuentaId });
+
+    encryptedHistorial = []
+    for (const trx of historial) {
+      resultResponse = {
+        id: trx._id,
+        tipo: trx.tipo,
+        monto: trx.monto,
+        fecha: trx.fecha,
+      }
+      const result = await encryptRSAPromise(resultResponse, idAcceso);
+      encryptedHistorial.push(result);
+    };
+
+    res.status(200).json({ encryptedData: encryptedHistorial });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el historial de transacciones' });
+  }
+};
+

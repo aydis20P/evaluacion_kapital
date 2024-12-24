@@ -24,10 +24,14 @@ exports.postCuentasValidations = [
   body('saldoInicial').isFloat().withMessage('Saldo inicial must be a number'),
 ];
 
-exports.getCuentasValidations = [...headerValidations];
+exports.getCuentasValidations = [
+  ...headerValidations,
+  header('x-id-acceso').notEmpty().withMessage('x-id-acceso header is required'),
+];
 
 exports.getCuentaByIdValidations = [
   ...headerValidations,
+  header('x-id-acceso').notEmpty().withMessage('x-id-acceso header is required'),
   param('cuentaId').isString().withMessage('CuentaId must be a string'),
 ];
 
@@ -48,3 +52,8 @@ exports.postTransaccionesValidations = [
   body('monto').isFloat().withMessage('Monto must be a number'),
 ];
 
+exports.getHistorialTransaccionesValidations = [
+  ...headerValidations,
+  header('x-id-acceso').notEmpty().withMessage('x-id-acceso header is required'),
+  param('cuentaId').isString().withMessage('CuentaId must be a string'),
+];
