@@ -80,7 +80,7 @@ paths:
       description: |-
         Servicio para la obtención de llaves RSA para el cifrado de datos sensibles
         Duración de las llaves de 5 minutos
-  /llaves/{idAcceso}:
+  '/llaves/{idAcceso}':
     get:
       summary: '/llaves/{idAcceso}'
       responses:
@@ -140,7 +140,7 @@ paths:
       description: Servicio para la obtención de llaves RSA para el cifrado de datos sensibles dado un idAcceso previamente generado en el servicio de llaves
   /token:
     post:
-      summary: /auth/token
+      summary: /token
       responses:
         '201':
           description: Created
@@ -192,6 +192,7 @@ paths:
           in: header
           name: x-id-transaccion
           description: UUID para la traza de la operación
+          required: true
 components:
   schemas: {}
   securitySchemes:

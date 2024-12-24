@@ -19,6 +19,48 @@ tags:
     description: Operaciones para depósitos y retiros.
 paths:
   /cuentas:
+    get:
+      summary: Listar todas las cuentas
+      tags:
+        - Cuentas
+      responses:
+        '200':
+          description: Lista de cuentas.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cuenta'
+              examples:
+                Example 1:
+                  value:
+                    - id: string
+                      nombre: string
+                      saldo: 0
+      x-stoplight:
+        id: 1bcr8eji4qqqz
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Atorization
+          description: Bearer token
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: x-id-transaccion
+          description: UUID para la traza de la operación
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: x-id-acceso
+          description: id acceso obtenido de la API de seguridad
+          required: true
+      operationId: get-cuentas
+      description: Servicio para la obtrención de todas las cuentas
     post:
       summary: Crear una nueva cuenta
       tags:
@@ -81,42 +123,6 @@ paths:
           name: x-id-acceso
           description: id acceso obtenido de la API de seguridad
           required: true
-    get:
-      summary: Listar todas las cuentas
-      tags:
-        - Cuentas
-      responses:
-        '200':
-          description: Lista de cuentas.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Cuenta'
-              examples:
-                Example 1:
-                  value:
-                    - id: string
-                      nombre: string
-                      saldo: 0
-      x-stoplight:
-        id: 1bcr8eji4qqqz
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Atorization
-          description: Bearer token
-          required: true
-        - schema:
-            type: string
-          in: header
-          name: x-id-transaccion
-          description: UUID para la traza de la operación
-          required: true
-      operationId: get-cuentas
-      description: Servicio para la obtrención de todas las cuentas
   '/cuentas/{cuentaId}':
     get:
       summary: Obtener detalles de una cuenta
@@ -128,7 +134,7 @@ paths:
           required: true
           schema:
             type: string
-          description: 'id de la cuenta'
+          description: id de la cuenta
         - schema:
             type: string
           in: header
@@ -140,6 +146,12 @@ paths:
           in: header
           name: x-id-transaccion
           description: UUID para la traza de la operación
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: x-id-acceso
+          description: id acceso obtenido de la API de seguridad
           required: true
       responses:
         '200':
@@ -247,6 +259,12 @@ paths:
           name: x-id-transaccion
           description: UUID para la traza de la operación
           required: true
+        - schema:
+            type: string
+          in: header
+          name: x-id-acceso
+          description: id acceso obtenido de la API de seguridad
+          required: true
       responses:
         '200':
           description: Saldo de la cuenta obtenido exitosamente.
@@ -291,6 +309,12 @@ paths:
           in: header
           name: x-id-transaccion
           description: UUID para la traza de la operación
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: x-id-acceso
+          description: id acceso obtenido de la API de seguridad
           required: true
       responses:
         '200':
