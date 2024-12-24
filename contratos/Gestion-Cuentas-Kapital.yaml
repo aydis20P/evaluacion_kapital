@@ -10,7 +10,7 @@ info:
     email: mich.palacios.hdz@gmail.com
     url: foo.bar.com
   license:
-    name: GNU General Public License v3.0
+    name: CC BY-NC 4.0
     url: 'https://fsf.org/'
 tags:
   - name: Cuentas
@@ -286,11 +286,11 @@ paths:
         id: 3cgqe2xw37oe3
       operationId: get-saldo
       description: Servicio para la consulta de saldo
-  '/cuentas/{cuentaId}/historial':
+  '/cuentas/{cuentaId}/transacciones':
     get:
       summary: Obtener el historial de transacciones de una cuenta
       tags:
-        - Cuentas
+        - Transacciones
       parameters:
         - name: cuentaId
           description: id de la cuenta
@@ -338,7 +338,13 @@ paths:
         id: wi412dswre5xp
       operationId: get-historial
       description: Servicio para la consulta del historial de saldo
-  '/cuentas/{cuentaId}/transacciones':
+    parameters:
+      - schema:
+          type: string
+        name: cuentaId
+        description: "Identificador de la cuenta"
+        in: path
+        required: true
     post:
       summary: Realizar un depósito o retiro
       tags:
