@@ -1,0 +1,459 @@
+{
+	"info": {
+		"_postman_id": "636e16b6-e6c0-45fe-b882-eac1b2d0da4d",
+		"name": "Kapital",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15693935",
+		"_collection_link": "https://universal-firefly-460708.postman.co/workspace/LWCobranza~14d6ba8a-3ba5-450c-b303-ff3b71a52390/collection/15693935-636e16b6-e6c0-45fe-b882-eac1b2d0da4d?action=share&source=collection_link&creator=15693935"
+	},
+	"item": [
+		{
+			"name": "Seguridad",
+			"item": [
+				{
+					"name": "llaves",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3NjYzODQwNzB9.2RvkCbw5KGaY2Apew_FtrkkdVIu46HthKeKMf67x4M8",
+								"type": "text"
+							},
+							{
+								"key": "x-id-transaccion",
+								"value": "2f04461d-e252-4799-99e5-9fe7bfd06821",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9001/llaves",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"llaves"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "llaves/{idAcceso}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3NjYzODQwNzB9.2RvkCbw5KGaY2Apew_FtrkkdVIu46HthKeKMf67x4M8",
+								"type": "text"
+							},
+							{
+								"key": "x-id-transaccion",
+								"value": "2f04461d-e252-4799-99e5-9fe7bfd06821",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:9001/llaves/20241222214815125",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"llaves",
+								"20241222214815125"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "Kapital",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "K@p1t@1pwD3s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-id-transaccion",
+								"value": "2f04461d-e252-4799-99e5-9fe7bfd06821",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:9001/token",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gestión Transacciones",
+			"item": [
+				{
+					"name": "cuentas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3NjYzODQwNzB9.2RvkCbw5KGaY2Apew_FtrkkdVIu46HthKeKMf67x4M8",
+								"type": "text"
+							},
+							{
+								"key": "x-id-transaccion",
+								"value": "2f04461d-e252-4799-99e5-9fe7bfd06821",
+								"type": "text"
+							},
+							{
+								"key": "x-id-acceso",
+								"value": "20241223161029061",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9000/cuentas",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9000",
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cuentas/{idCuenta}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3NjYzODQwNzB9.2RvkCbw5KGaY2Apew_FtrkkdVIu46HthKeKMf67x4M8",
+								"type": "text"
+							},
+							{
+								"key": "x-id-transaccion",
+								"value": "2f04461d-e252-4799-99e5-9fe7bfd06821",
+								"type": "text"
+							},
+							{
+								"key": "x-id-acceso",
+								"value": "20241223161029061",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9000/cuentas/6769bae89e6ae156201b1a47",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9000",
+							"path": [
+								"cuentas",
+								"6769bae89e6ae156201b1a47"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cuentas/{idCuenta}/transacciones",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3NjYzODQwNzB9.2RvkCbw5KGaY2Apew_FtrkkdVIu46HthKeKMf67x4M8",
+								"type": "text"
+							},
+							{
+								"key": "x-id-transaccion",
+								"value": "2f04461d-e252-4799-99e5-9fe7bfd06821",
+								"type": "text"
+							},
+							{
+								"key": "x-id-acceso",
+								"value": "20241224050613993",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9000/cuentas/6769bae89e6ae156201b1a47/transacciones",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9000",
+							"path": [
+								"cuentas",
+								"6769bae89e6ae156201b1a47",
+								"transacciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cuentas",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3NjYzODQwNzB9.2RvkCbw5KGaY2Apew_FtrkkdVIu46HthKeKMf67x4M8",
+								"type": "text"
+							},
+							{
+								"key": "x-id-transaccion",
+								"value": "2f04461d-e252-4799-99e5-9fe7bfd06821",
+								"type": "text"
+							},
+							{
+								"key": "x-id-acceso",
+								"value": "20241223161029061",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"encryptedData\": \"FChBHNmvMhoSnA1t+E97ZmytVF6R0rZ0nqIf0PgaUtR5I3MOtzfWrkp3YzMhRr1qs5LYwKnHWGxnExskX/z312Am4KXDhaxr7p2dcle3fcVmZYJ9ugNg8cwftsNgJt9bvJaMBkb3JVG8HU4xjyTb+JGwca1trPoavdPlVVb2DiVvqLY/JN/Ny2wxNWYvBMsGld6poHxW9F3rmum/zwRS+87j6CuTmvrBzkuyaaDG7euc+9R8ThQPAq9Jua1tXaoGTto7oCb/A4PVsm46nmT1g1IG1wVIvI357vwZOkaOuRWDwyihebt9f9WLfKjQbS5POmW2Ox1mefhqc2Lk07OQiA==\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9000/cuentas",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9000",
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cuentas/{idCuenta}/transacciones",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3NjYzODQwNzB9.2RvkCbw5KGaY2Apew_FtrkkdVIu46HthKeKMf67x4M8",
+								"type": "text"
+							},
+							{
+								"key": "x-id-transaccion",
+								"value": "2f04461d-e252-4799-99e5-9fe7bfd06821",
+								"type": "text"
+							},
+							{
+								"key": "x-id-acceso",
+								"value": "20241223161029061",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"encryptedData\": \"eVQMe6gLEdVTmWc9rpHrND9iTW/Ox4hw9fZPxbrT+tAHKvAYKTLo2nPvRvf3NS7fIp7/RFTXNT4xAGR1K33pne4k1EBOhz0WSbf9rfi+1lWYz0CWHTU9uCq2Wipdx1/Ub4v6SQaGjGmR3sOVbWV0qUjv/+wn8FTtxX2OPnmE1a9zL+H6mW9whZP1opJ0ZL6nGI9E3RN4vfPU+T69rKGjwMBlJbiosUGnDhtlz+kHP95accIYZRhoob855gZr59OLoTkIBzqc0EFhBL/dAET0rfeC5/SOuhfdTXydFJNDrUCYIwhVeQdtfCsB/Tl9WpFqzIHTb5sIvP2mv33w4/b2ZQ==\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9000/cuentas/6769bae89e6ae156201b1a47/transacciones",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9000",
+							"path": [
+								"cuentas",
+								"6769bae89e6ae156201b1a47",
+								"transacciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cuentas/{idCuenta}",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3NjYzODQwNzB9.2RvkCbw5KGaY2Apew_FtrkkdVIu46HthKeKMf67x4M8",
+								"type": "text"
+							},
+							{
+								"key": "x-id-transaccion",
+								"value": "2f04461d-e252-4799-99e5-9fe7bfd06821",
+								"type": "text"
+							},
+							{
+								"key": "x-id-acceso",
+								"value": "20241223161029061",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"encryptedData\": \"cCGQ4h8mUHFabNTtjLnbO+DmPwPR0MbtSIZ30cj3zNCiCHXQBhamnFoHOLIaapG4wF7Vcd/Aa3kaLHW3eyvuzgZLbksQ4LTgChzJ4Aigi4keZ0kCewdUkka6tnJVdLheKOB2zrf6oKmeqloCQo1lzTEO136khEnXyuGeHaULUt+G0Y+KFkJMYDhLTys/WdN1NQ7lunhFPo4cRWMEtDxjaQxra6okvEUqHce9lWN/zROGl+ZnpLnbJFD3xD3SZbbYBGiyU8SDUvsX6AJ4ZA/D5U0U49vXDnVPPhLloAZkhrQ74UsCUMr5w7KbB0H2agos008diK57DTRSG3TbcFezwg==\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9000/cuentas/6769bae89e6ae156201b1a47",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9000",
+							"path": [
+								"cuentas",
+								"6769bae89e6ae156201b1a47"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
